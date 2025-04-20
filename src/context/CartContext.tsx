@@ -1,7 +1,7 @@
 // src/context/CartContext.tsx
 import { createContext, useState, useContext, useEffect } from 'react';
 import { CartItem } from '../utils/types';
-import { useAuth } from './AuthContext';
+
 
 interface CartContextType {
   cart: CartItem[];
@@ -16,24 +16,41 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const { isLoggedIn } = useAuth();
   const [cart, setCart] = useState<CartItem[]>(() => {
     // Load cart from localStorage if available
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
   });
 
+
   // Save cart to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  // Clear cart when user logs out
+  // Listen for auth token changes to detect logout
   useEffect(() => {
-    if (!isLoggedIn) {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === 'accessToken' && e.newValue === null) {
+        // User logged out, clear cart state
+        setCart([]);
+      }
+    };
+    
+    window.addEventListener('storage', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
+
+  // Additional effect to check auth status on component mount
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
       setCart([]);
     }
-  }, [isLoggedIn]);
+  }, []);
 
   const addToCart = (item: Omit<CartItem, 'quantity'>, quantity: number = 1) => {
     setCart(prev => {
