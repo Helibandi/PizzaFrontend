@@ -125,11 +125,3 @@ const Login = () => {
 };
 
 export default Login;
-
-//function setInMemoryToken(token: string) {
- // throw new Error('Function not implemented.');
-//}
-//function scheduleTokenRefresh(arg0: number) {
-//  throw new Error('Function not implemented.');
-//}
-

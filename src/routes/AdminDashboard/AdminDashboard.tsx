@@ -5,9 +5,12 @@ import { BASE_URL } from '../../utils/backend-conf';
 import { AllOrders, Product } from '../../utils/types';
 import { Orders } from '../../utils/types';
 import { OrderItem } from '../../utils/types';
-
+import { useAuth } from '../../context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdminDashboard = () => {
+  const { refreshToken } = useAuth();
   const [activeTab, setActiveTab] = useState('products');
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [currentProduct, setCurrentProduct] = useState<Product | null>(null);

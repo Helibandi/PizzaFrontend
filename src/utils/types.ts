@@ -1,13 +1,13 @@
 export interface User {
   id: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  address: string;
-  city: string;
-  postalCode: string;
-  phoneNumber: string;
-  roles: string[];
+  Email: string;
+  FirstName: string;
+  LastName: string;
+  Address: string;
+  City: string;
+  PostalCode: string;
+  PhoneNumber: string;
+  Roles: string[];
 }
 
 export interface LoginResponse {

@@ -17,6 +17,7 @@ import CartDisplay from './components/CartDisplay/CartDisplay';
 import AdminDashboard from './routes/AdminDashboard/AdminDashboard'
 import OrderConfirm from './routes/OrderConfirm/OrderConfirm'
 import OrderDetails from './routes/OrderDetails/OrderDetails'
+import ProtectedRoutes from './utils/ProtectedRoutes'
 
 function App() {
   return (

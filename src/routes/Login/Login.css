@@ -163,8 +163,9 @@
   }
   
   .login-button:hover {
-    background-color: var(--secondary-color);
+    background-color: #f5bcc1;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.2);
   }
 
   .register-button:hover {

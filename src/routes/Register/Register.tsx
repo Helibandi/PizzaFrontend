@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { User } from '../../utils/types';
 import { BASE_URL } from '../../utils/backend-conf';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './Register.css';
 
 type RegisterProps = {
@@ -53,15 +55,21 @@ const Register = ({ setUserData }: RegisterProps) => {
         },
         body: JSON.stringify(formData)
       });
+      const notify = () => toast.success('The reisgtration was successful!', { autoClose: 2000 });
+
+      if (response.status === 200) {
+        notify();
+        const userData: User = await response.json();
+        setUserData(userData);
+        
+      }
 
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Registration failed.');
       }
 
-      const userData: User = await response.json();
-      setUserData(userData);
-      navigate('/');
+      
     } catch (err: any) {
       setError(err.message || 'Something went wrong. Please try again.');
     }
@@ -75,7 +83,7 @@ const Register = ({ setUserData }: RegisterProps) => {
           <p>Fill in your details to register</p>
         </div>
 
-        {error && <div className="error-message">{error}</div>}
+          {/*error && <div className="error-message">{error}</div>*/}
 
         <form className="register-form" onSubmit={handleSubmit}>
           <div className="form-group">
@@ -207,6 +215,7 @@ const Register = ({ setUserData }: RegisterProps) => {
             Already have an account? Sign in
           </Link>
         </form>
+        <ToastContainer />
       </div>
     </div>
   );

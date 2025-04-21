@@ -102,12 +102,12 @@ const Account = () => {
     try {
       // Transform data to match the API's expected format
       const userData = {
-        firstName: editableUser.first_name,
-        lastName: editableUser.last_name,
-        address: editableUser.address,
-        city: editableUser.city,
-        postalCode: editableUser.postal_code,
-        phoneNumber: editableUser.phone_number
+        FirstName: editableUser.FirstName,
+        LastName: editableUser.LastName,
+        Address: editableUser.Address,
+        City: editableUser.City,
+        PostalCode: editableUser.PostalCode,
+        PhoneNumber: editableUser.PhoneNumber
       };
 
       const accesstoken = localStorage.getItem('accessToken'); 
@@ -129,12 +129,12 @@ const Account = () => {
         // Update localStorage with the edited user data
         const updatedUserData = {
           ...user,
-          first_name: editableUser.first_name,
-          last_name: editableUser.last_name,
-          address: editableUser.address, 
-          city: editableUser.city,
-          postal_code: editableUser.postal_code,
-          phone_number: editableUser.phone_number
+          first_name: editableUser.FirstName,
+          last_name: editableUser.LastName,
+          address: editableUser.Address, 
+          city: editableUser.City,
+          postal_code: editableUser.PostalCode,
+          phone_number: editableUser.PhoneNumber
         };
         
         setUser(updatedUserData);
@@ -231,7 +231,7 @@ const Account = () => {
               <input 
                 type="email" 
                 name="email"
-                value={editableUser?.email || ''}
+                value={editableUser?.Email || ''}
                 onChange={handleInputChange}
                 required
               />
@@ -240,7 +240,7 @@ const Account = () => {
               <label>First Name</label>
               <input 
                 name="first_name"
-                value={editableUser?.first_name || ''}
+                value={editableUser?.FirstName || ''}
                 onChange={handleInputChange}
                 type="text" 
                 required
@@ -250,7 +250,7 @@ const Account = () => {
               <label>Last Name</label>
               <input 
                 name="last_name"
-                value={editableUser?.last_name || ''}
+                value={editableUser?.LastName || ''}
                 onChange={handleInputChange}
                 type="text" 
                 required
@@ -261,7 +261,7 @@ const Account = () => {
               <input 
                 type="text" 
                 name="address"
-                value={editableUser?.address || ''}
+                value={editableUser?.Address || ''}
                 onChange={handleInputChange}
                 required
               />
@@ -271,7 +271,7 @@ const Account = () => {
               <input 
                 type="text" 
                 name="phone_number"
-                value={editableUser?.phone_number || ''}
+                value={editableUser?.PhoneNumber || ''}
                 onChange={handleInputChange}
                 required
               />
@@ -282,7 +282,7 @@ const Account = () => {
                 <input 
                   type="text" 
                   name="city"
-                  value={editableUser?.city || ''}
+                  value={editableUser?.City || ''}
                   onChange={handleInputChange}
                   required
                 />
@@ -292,7 +292,7 @@ const Account = () => {
                 <input 
                   type="text" 
                   name="postal_code"
-                  value={editableUser?.postal_code || ''}
+                  value={editableUser?.PostalCode || ''}
                   onChange={handleInputChange}
                   required
                 />
