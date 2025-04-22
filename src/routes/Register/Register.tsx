@@ -86,18 +86,7 @@ const Register = ({ setUserData }: RegisterProps) => {
           {/*error && <div className="error-message">{error}</div>*/}
 
         <form className="register-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="userName">Username</label>
-            <input
-              id="userName"
-              name="userName"
-              type="text"
-              autoComplete="username"
-              required
-              value={formData.userName}
-              onChange={handleChange}
-            />
-          </div>
+         
 
           <div className="form-group">
             <label htmlFor="email">Email Address</label>

@@ -25,12 +25,14 @@ namespace PizzaBackend.Controllers
         private readonly ITokenService _tokenService;
         private readonly SignInManager<User> _signInManager;
         private readonly AppDbContext _context;
-        public AccountController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signinmanager, AppDbContext context)
+        private readonly IConfiguration _config;
+        public AccountController(UserManager<User> userManager, ITokenService tokenService, SignInManager<User> signinmanager, AppDbContext context, IConfiguration config)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _signInManager = signinmanager;
             _context = context;
+            _config = config;
         }
 
 
@@ -71,7 +73,7 @@ namespace PizzaBackend.Controllers
                 {
                     Token = token,
                     RefreshToken = refreshToken,
-                    TokenExpiration = DateTime.Now.AddHours(6)
+                    TokenExpiration = DateTime.UtcNow.AddSeconds(_config.GetValue<int>("JWT:AccesTokenExpirationSeconds"))
                 });
         }
 
@@ -117,12 +119,12 @@ namespace PizzaBackend.Controllers
 
                 Token = newToken,
                 RefreshToken = newRefreshToken,
-                TokenExpiration = DateTime.Now.AddMinutes(15),
+                TokenExpiration = DateTime.UtcNow.AddSeconds(_config.GetValue<int>("JWT:AccesTokenExpirationSeconds"))
 
 
-                
-                
-                
+
+
+
             });
         }
 

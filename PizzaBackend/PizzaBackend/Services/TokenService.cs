@@ -55,7 +55,7 @@ namespace PizzaBackend.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddHours(3),
+                Expires = DateTime.UtcNow.AddSeconds(_config.GetValue<int>("JWT:AccesTokenExpirationSeconds")),
                 SigningCredentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature),
                 Issuer = _config["JWT:Issuer"],
                 Audience = _config["JWT:Audience"]
